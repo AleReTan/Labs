@@ -1,5 +1,7 @@
 package ru.vsu;
 
+import org.joda.time.LocalDate;
+
 public class Person {
     private String firstName;
     private String middleName;
@@ -39,13 +41,22 @@ public class Person {
         this.age = age;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
-        return Person.class.getSimpleName() +
+        return Person.class.getSimpleName()+
                 "firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", birthday=" + birthday +
                 '}';
     }
 }
