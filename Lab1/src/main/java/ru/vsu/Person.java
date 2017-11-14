@@ -9,6 +9,12 @@ public class Person {
     private int age;
     private LocalDate birthday;
 
+    public Person(String firstName, String middleName, String lastName) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -51,7 +57,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return Person.class.getSimpleName()+
+        return Person.class.getSimpleName() +
                 "firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
