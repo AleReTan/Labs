@@ -9,11 +9,31 @@ public class Person {
     private int age;
     private LocalDate birthday;
 
+    public Person() {
+
+    }
+
     public Person(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
     }
+
+    public Person(String firstName, String middleName, String lastName, int age, LocalDate birthday) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.age = age;
+        this.birthday = birthday;
+    }
+
+    public Person(String firstName, String middleName, String lastName, int age) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -58,11 +78,10 @@ public class Person {
     @Override
     public String toString() {
         return Person.class.getSimpleName() +
-                "firstName='" + firstName + '\'' +
+                " firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", birthday=" + birthday +
-                '}';
+                ", birthday=" + birthday + ";";
     }
 }
