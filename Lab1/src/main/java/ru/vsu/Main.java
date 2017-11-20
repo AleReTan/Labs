@@ -4,11 +4,12 @@ import org.joda.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        //Creating new objects Person
         Person person1 = new Person("1", "1", "1");
         Person person2 = new Person("2", "2", "2");
         Person person3 = new Person("3", "3", "3");
         Person person4 = new Person("4", "4", "4");
-        Person person5 = new Person("4", "4", "4", 24, new LocalDate(1993,7,27));
+        Person person5 = new Person("4", "4", "4", 24, new LocalDate(1993, 7, 27));
 
         PersonRepository.print();
         PersonRepository.debug();
@@ -29,7 +30,7 @@ public class Main {
         PersonRepository.print();
         PersonRepository.debug();
 
-        PersonRepository.remove(5);
+        PersonRepository.remove(PersonRepository.getCapacity() - 1);
         PersonRepository.print();
         PersonRepository.debug();
 
