@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+        PersonRepository personRepository = new PersonRepository();
         //Creating new objects Person
         Person person1 = new Person("1", "1", "1");
         Person person2 = new Person("2", "2", "2");
@@ -11,28 +12,34 @@ public class Main {
         Person person4 = new Person("4", "4", "4");
         Person person5 = new Person("4", "4", "4", 24, new LocalDate(1993, 7, 27));
 
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.print();
+        personRepository.debug();
 
-        PersonRepository.add(person1);
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.add(person1);
+        personRepository.print();
+        personRepository.debug();
 
-        PersonRepository.add(person2);
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.add(person2);
+        personRepository.print();
+        personRepository.debug();
 
-        PersonRepository.add(person3);
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.add(person3);
+        personRepository.print();
+        personRepository.debug();
 
-        PersonRepository.add(person4);
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.add(person4);
+        personRepository.print();
+        personRepository.debug();
 
-        PersonRepository.remove(PersonRepository.getCapacity() - 1);
-        PersonRepository.print();
-        PersonRepository.debug();
+        personRepository.remove(2);
+        personRepository.print();
+        personRepository.debug();
+
+        personRepository.remove(0);
+        personRepository.print();
+        personRepository.debug();
+
+        //personRepository.trimToSize();
 
         System.out.println(person5.toString());
     }

@@ -6,6 +6,9 @@ import org.joda.time.LocalDate;
  * Person class.
  */
 public class Person {
+    //переменная для инкремментирвоания айдишника
+    private static int tempId = 1; //TODO: почитать про uuid и uid и мб переделать на них
+    private int id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -16,17 +19,21 @@ public class Person {
      * Empty constructor.
      */
     public Person() {
+        this.id=tempId;
+        tempId++;
 
     }
 
     /**
      * Constructor with name.
      *
-     * @param firstName first name
+     * @param firstName  first name
      * @param middleName middle name
-     * @param lastName last name
+     * @param lastName   last name
      */
     public Person(String firstName, String middleName, String lastName) {
+        this.id=tempId;
+        tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -35,13 +42,15 @@ public class Person {
     /**
      * Constructor with name, age and birth date.
      *
-     * @param firstName first name
+     * @param firstName  first name
      * @param middleName middle name
-     * @param lastName last name
-     * @param age age
-     * @param birthday birth date
+     * @param lastName   last name
+     * @param age        age
+     * @param birthday   birth date
      */
     public Person(String firstName, String middleName, String lastName, int age, LocalDate birthday) {
+        this.id=tempId;
+        tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -52,18 +61,27 @@ public class Person {
     /**
      * Constructor with name and age.
      *
-     * @param firstName first name
+     * @param firstName  first name
      * @param middleName middle name
-     * @param lastName last name
-     * @param age age
+     * @param lastName   last name
+     * @param age        age
      */
     public Person(String firstName, String middleName, String lastName, int age) {
+        this.id=tempId;
+        tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.age = age;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -108,10 +126,12 @@ public class Person {
     @Override
     public String toString() {
         return Person.class.getSimpleName() +
-                " firstName='" + firstName + '\'' +
+                " id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", birthday=" + birthday + ";";
+                ", birthday=" + birthday +
+                '}';
     }
 }
