@@ -39,8 +39,13 @@ public class Main {
         personRepository.print();
         personRepository.debug();
 
-        //personRepository.trimToSize();
+        personRepository.trimToSize();
+        personRepository.print();
+        personRepository.debug();
 
+        personRepository.add(person1);
+        personRepository.print();
+        personRepository.debug();
         System.out.println(person5.toString());
     }
 }

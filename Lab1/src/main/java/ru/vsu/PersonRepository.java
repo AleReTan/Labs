@@ -49,7 +49,7 @@ public class PersonRepository {
      */
     public void add(Person newPerson) {
         if (numberOfCurrentElements + 1 > repository.length) {
-            extendArray();
+            extendRepository();
         }
         repository[numberOfCurrentElements] = newPerson;
         numberOfCurrentElements++;
@@ -77,7 +77,7 @@ public class PersonRepository {
     /**
      * Method for extending repository.
      */
-    private void extendArray() {
+    private void extendRepository() {
         int newLength = repository.length + (int) Math.ceil(repository.length / 2.0);
         Person[] newRepository = new Person[newLength];
         System.arraycopy(repository, 0, newRepository, 0, repository.length);
@@ -115,22 +115,24 @@ public class PersonRepository {
         Person[] match = new Person[numberOfCurrentElements];
         int i = 0;
         for (Person person : repository) {
-            if (person.getId() == id) match[i] = person;//TODO:спросить, мб здесь просто i++ и удалить некст строку
-            i++;
+            if (person.getId() == id) {
+                match[i] = person;//TODO:спросить, мб здесь просто i++ и удалить некст строку
+                i++;
+            }
         }
-        trimToSize(match);
+        //trimToSize(match);
+        //////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return match;
     }
 
     /**
-     * rims the capacity of target array instance to be the array's current size
-     * @param rep target array
-     * @return
+     * Trims the capacity of target array instance to be the array's current size
      */
-    public Person[] trimToSize(Person[] rep) { //TODO: понять, хорошо ли применять его к массиву, или все таки к самому репозиторию
+    public void trimToSize() { //TODO: не пашет
         Person[] correctSize = new Person[numberOfCurrentElements];
-        System.arraycopy(rep, 0, correctSize, 0, numberOfCurrentElements);
-        return correctSize;
+        System.arraycopy(repository, 0, correctSize, 0, numberOfCurrentElements);
+        this.repository=correctSize;
+
     }
 
     /**
@@ -139,6 +141,10 @@ public class PersonRepository {
      * @return capacity
      */
     public int getCapacity() {
-        return this.repository.length;
+        return repository.length;
+    }
+
+    public Person[] getRepository() {
+        return repository;
     }
 }
