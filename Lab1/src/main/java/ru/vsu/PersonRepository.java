@@ -32,11 +32,11 @@ public class PersonRepository {
      */
     public Person[] getAllPersons() {
         Person[] allPersons = new Person[numberOfCurrentElements];
-        int ind = 0;
+        int count = 0;
         for (Person person : repository) {
             if (!(person == null)) {
-                allPersons[ind] = person;
-                ind++;
+                allPersons[count] = person;
+                count++;
             }
         }
         return allPersons;
@@ -112,26 +112,26 @@ public class PersonRepository {
      * @return array of matching persons
      */
     public Person[] search(int id) {
-        Person[] match = new Person[numberOfCurrentElements];
-        int i = 0;
+        Person[] tempMatch = new Person[numberOfCurrentElements];
+        int count = 0;// подсчет удовлетворяющих нас элементов
         for (Person person : repository) {
             if (person.getId() == id) {
-                match[i] = person;//TODO:спросить, мб здесь просто i++ и удалить некст строку
-                i++;
+                tempMatch[count] = person;//TODO:спросить, мб здесь просто i++ и удалить некст строку, юзать компаратор??
+                count++;
             }
         }
-        //trimToSize(match);
-        //////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Person[] match = new Person[count];
+        System.arraycopy(tempMatch, 0, match, 0, count);
         return match;
     }
 
     /**
      * Trims the capacity of target array instance to be the array's current size
      */
-    public void trimToSize() { //TODO: не пашет
+    public void trimToSize() {
         Person[] correctSize = new Person[numberOfCurrentElements];
         System.arraycopy(repository, 0, correctSize, 0, numberOfCurrentElements);
-        this.repository=correctSize;
+        this.repository = correctSize;
 
     }
 

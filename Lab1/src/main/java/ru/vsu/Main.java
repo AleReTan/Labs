@@ -2,6 +2,8 @@ package ru.vsu;
 
 import org.joda.time.LocalDate;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         PersonRepository personRepository = new PersonRepository();
@@ -46,6 +48,8 @@ public class Main {
         personRepository.add(person1);
         personRepository.print();
         personRepository.debug();
+
+        System.out.println(Arrays.toString(personRepository.search(2)));
         System.out.println(person5.toString());
     }
 }
