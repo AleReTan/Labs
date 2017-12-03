@@ -1,6 +1,6 @@
 package ru.vsu;
 
-import java.util.Arrays;
+import ru.vsu.Entities.Person;
 
 /**
  * Class for storing Persons objects.
@@ -116,15 +116,13 @@ public class PersonRepository {
         int count = 0;// подсчет удовлетворяющих нас элементов
         for (Person person : repository) {
             if (person.getId() == id) {
-                tempMatch[count] = person;//TODO:спросить, мб здесь просто i++ и удалить некст строку, юзать компаратор??
-                count++;
+                tempMatch[count++] = person;
             }
         }
         Person[] match = new Person[count];
         System.arraycopy(tempMatch, 0, match, 0, count);
         return match;
     }
-
     /**
      * Trims the capacity of target array instance to be the array's current size
      */

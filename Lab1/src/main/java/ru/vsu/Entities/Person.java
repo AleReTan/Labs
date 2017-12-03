@@ -1,4 +1,4 @@
-package ru.vsu;
+package ru.vsu.Entities;
 
 import org.joda.time.LocalDate;
 
@@ -12,7 +12,6 @@ public class Person {
     private String firstName;
     private String middleName;
     private String lastName;
-    private int age;
     private LocalDate birthday;
 
     /**
@@ -45,16 +44,14 @@ public class Person {
      * @param firstName  first name
      * @param middleName middle name
      * @param lastName   last name
-     * @param age        age
      * @param birthday   birth date
      */
-    public Person(String firstName, String middleName, String lastName, int age, LocalDate birthday) {
+    public Person(String firstName, String middleName, String lastName, LocalDate birthday) {
         this.id=tempId;
         tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.age = age;
         this.birthday = birthday;
     }
 
@@ -64,7 +61,6 @@ public class Person {
      * @param firstName  first name
      * @param middleName middle name
      * @param lastName   last name
-     * @param age        age
      */
     public Person(String firstName, String middleName, String lastName, int age) {
         this.id=tempId;
@@ -72,7 +68,6 @@ public class Person {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.age = age;
     }
 
     public int getId() {
@@ -108,12 +103,8 @@ public class Person {
     }
 
     public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+        return LocalDate.now().minus(birthday);
+    }//TODO:СДЕЛАТЬ ГЕТЕЙДЖ ИЗ НАУ-БИРСДЕЙ
 
     public LocalDate getBirthday() {
         return birthday;
@@ -130,7 +121,6 @@ public class Person {
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
                 ", birthday=" + birthday +
                 '}';
     }
