@@ -103,8 +103,9 @@ public class Person {
     }
 
     public int getAge() {
-        return LocalDate.now().minus(birthday);
-    }//TODO:СДЕЛАТЬ ГЕТЕЙДЖ ИЗ НАУ-БИРСДЕЙ
+        if (birthday == null) return 0;
+        else return LocalDate.now().getYear()-birthday.getYear();
+    }
 
     public LocalDate getBirthday() {
         return birthday;
@@ -122,6 +123,7 @@ public class Person {
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthday=" + birthday +
+                ", age=" + getAge() +
                 '}';
     }
 }

@@ -1,9 +1,6 @@
 package ru.vsu.Comparators;
+import ru.vsu.Entities.Person;
 
-import java.util.Comparator;
-
-public interface PersonComparator extends Comparator {
-
-    @Override
-    int compare(Object o1, Object o2);
+public interface PersonComparator {
+    public int compare(Person o1, Person o2);
 }

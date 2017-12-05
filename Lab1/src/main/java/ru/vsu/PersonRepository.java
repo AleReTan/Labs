@@ -1,6 +1,10 @@
 package ru.vsu;
 
+import ru.vsu.Comparators.PersonComparatorByFio;
 import ru.vsu.Entities.Person;
+import ru.vsu.Searcher.FioPersonChecker;
+import ru.vsu.Searcher.PersonChecker;
+import ru.vsu.Sorter.PersonSorter;
 
 /**
  * Class for storing Persons objects.
@@ -9,7 +13,7 @@ public class PersonRepository {
     private final int INITIAL_PERSON_CAP = 2;
     private Person[] repository = new Person[INITIAL_PERSON_CAP];
     private int numberOfCurrentElements = 0;
-
+    private PersonSorter sorter = Configurator.getInstance().getSorter(); //sorter
     /**
      * Returns the Person element at the specified position in this repository.
      *
@@ -123,6 +127,7 @@ public class PersonRepository {
         System.arraycopy(tempMatch, 0, match, 0, count);
         return match;
     }
+
     /**
      * Trims the capacity of target array instance to be the array's current size
      */
@@ -144,5 +149,25 @@ public class PersonRepository {
 
     public Person[] getRepository() {
         return repository;
+    }
+
+    public void setSorter(PersonSorter sorter){
+        this.sorter = sorter;
+    }
+
+    public void sortByFio(){
+        sorter.sort(repository, new PersonComparatorByFio());
+    }
+
+    private PersonRepository search(PersonChecker checker, Object value){
+        PersonRepository result = new PersonRepository();
+        for(int i=0;i<repository.length;i++){
+            if (checker.check(repository[i], value));
+            result.add(repository[i]);
+        }
+    }
+
+    public PersonRepository searchByFio(String fio){
+        return search(new FioPersonChecker(),fio);
     }
 }
