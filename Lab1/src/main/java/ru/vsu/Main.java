@@ -1,7 +1,8 @@
 package ru.vsu;
 
 import org.joda.time.LocalDate;
-import ru.vsu.Entities.Person;
+import ru.vsu.entity.entityImpl.Person;
+import ru.vsu.repository.repositoryImpl.PersonRepository;
 
 import java.util.Arrays;
 

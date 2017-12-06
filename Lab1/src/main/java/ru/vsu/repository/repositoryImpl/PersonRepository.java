@@ -1,19 +1,27 @@
-package ru.vsu;
+package ru.vsu.repository.repositoryImpl;
 
-import ru.vsu.Comparators.PersonComparatorByFio;
-import ru.vsu.Entities.Person;
-import ru.vsu.Searcher.FioPersonChecker;
-import ru.vsu.Searcher.PersonChecker;
-import ru.vsu.Sorter.PersonSorter;
+import org.joda.time.LocalDate;
+import ru.vsu.comparator.comparatorImpl.PersonComparatorByLastName;
+import ru.vsu.Configurator;
+import ru.vsu.entity.entityImpl.Person;
+import ru.vsu.searcher.searcherImpl.LastNamePersonChecker;
+import ru.vsu.searcher.PersonChecker;
+import ru.vsu.sorter.PersonSorter;
 
 /**
  * Class for storing Persons objects.
  */
 public class PersonRepository {
     private final int INITIAL_PERSON_CAP = 2;
-    private Person[] repository = new Person[INITIAL_PERSON_CAP];
+    private Person[] repository;
     private int numberOfCurrentElements = 0;
+
     private PersonSorter sorter = Configurator.getInstance().getSorter(); //sorter
+
+    public PersonRepository() {
+        repository = new Person[INITIAL_PERSON_CAP];
+    }
+
     /**
      * Returns the Person element at the specified position in this repository.
      *
@@ -151,23 +159,32 @@ public class PersonRepository {
         return repository;
     }
 
-    public void setSorter(PersonSorter sorter){
+    public void setSorter(PersonSorter sorter) {
         this.sorter = sorter;
     }
 
-    public void sortByFio(){
-        sorter.sort(repository, new PersonComparatorByFio());
+    public void sortByFio() {
+        sorter.sort(repository, new PersonComparatorByLastName());
     }
 
-    private PersonRepository search(PersonChecker checker, Object value){
+    private PersonRepository search(PersonChecker checker, Object value) {
         PersonRepository result = new PersonRepository();
-        for(int i=0;i<repository.length;i++){
-            if (checker.check(repository[i], value));
+        for (int i = 0; i < repository.length; i++) {
+            if (checker.check(repository[i], value)) ;
             result.add(repository[i]);
         }
+        return result;
     }
 
-    public PersonRepository searchByFio(String fio){
-        return search(new FioPersonChecker(),fio);
+    public PersonRepository searchByFio(String fio) {
+        return search(new LastNamePersonChecker(), fio);
+    }
+
+    public PersonRepository searchByAge(Integer age) {
+        return search((p, a) -> p.getAge().equals(a), age);
+    }
+
+    public PersonRepository searchByBirthDate(LocalDate date) {
+        return search((p, a) -> p.getBirthday().equals(a), date);
     }
 }

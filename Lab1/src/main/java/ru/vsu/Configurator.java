@@ -1,13 +1,23 @@
 package ru.vsu;
 
-import ru.vsu.Sorter.PersonSorter;
+import ru.vsu.sorter.PersonSorter;
+import ru.vsu.sorter.sorterImpl.BubblePersonSorter;
 
 public class Configurator {
-    public PersonSorter getSorter(){
+    private static Configurator instance;
 
-        return null;
+    private Configurator() {
     }
-    public static Configurator getInstance(){//TODO: do
-        return null;
+
+    public PersonSorter getSorter() {
+
+        return new BubblePersonSorter();// заглушка, сюда парсинг из пропертиес
+    }
+
+    public static Configurator getInstance() {
+        if (instance == null) {
+            instance = new Configurator();
+        }
+        return instance;
     }
 }

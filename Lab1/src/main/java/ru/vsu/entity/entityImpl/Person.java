@@ -1,4 +1,4 @@
-package ru.vsu.Entities;
+package ru.vsu.entity.entityImpl;
 
 import org.joda.time.LocalDate;
 
@@ -102,7 +102,7 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         if (birthday == null) return 0;
         else return LocalDate.now().getYear()-birthday.getYear();
     }
