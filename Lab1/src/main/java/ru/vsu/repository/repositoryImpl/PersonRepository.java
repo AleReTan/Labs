@@ -1,8 +1,8 @@
 package ru.vsu.repository.repositoryImpl;
 
 import org.joda.time.LocalDate;
-import ru.vsu.comparator.comparatorImpl.PersonComparatorByLastName;
-import ru.vsu.Configurator;
+import ru.vsu.comparator.comparatorImpl.*;
+import ru.vsu.util.Configurator;
 import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.searcher.searcherImpl.LastNamePersonChecker;
 import ru.vsu.searcher.PersonChecker;
@@ -118,25 +118,6 @@ public class PersonRepository {
     }
 
     /**
-     * Search by id
-     *
-     * @param id target id
-     * @return array of matching persons
-     */
-    public Person[] search(int id) {
-        Person[] tempMatch = new Person[numberOfCurrentElements];
-        int count = 0;// подсчет удовлетворяющих нас элементов
-        for (Person person : repository) {
-            if (person.getId() == id) {
-                tempMatch[count++] = person;
-            }
-        }
-        Person[] match = new Person[count];
-        System.arraycopy(tempMatch, 0, match, 0, count);
-        return match;
-    }
-
-    /**
      * Trims the capacity of target array instance to be the array's current size
      */
     public void trimToSize() {
@@ -163,8 +144,16 @@ public class PersonRepository {
         this.sorter = sorter;
     }
 
-    public void sortByFio() {
+    public void sortByLastName() {
         sorter.sort(repository, new PersonComparatorByLastName());
+    }
+
+    public void sortByAge() {
+        sorter.sort(repository, new PersonComparatorByAge());
+    }
+
+    public void sortById() {
+        sorter.sort(repository, new PersonComparatorById());
     }
 
     private PersonRepository search(PersonChecker checker, Object value) {
@@ -176,8 +165,8 @@ public class PersonRepository {
         return result;
     }
 
-    public PersonRepository searchByFio(String fio) {
-        return search(new LastNamePersonChecker(), fio);
+    public PersonRepository searchByFio(String lastName) {
+        return search(new LastNamePersonChecker(), lastName);
     }
 
     public PersonRepository searchByAge(Integer age) {
