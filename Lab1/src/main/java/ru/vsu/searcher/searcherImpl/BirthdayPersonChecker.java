@@ -3,9 +3,9 @@ package ru.vsu.searcher.searcherImpl;
 import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.searcher.PersonChecker;
 
-public class AgePersonChecker implements PersonChecker{
+public class BirthdayPersonChecker implements PersonChecker{
     @Override
     public boolean check(Person p, Object value) {
-        return p.getAge().equals(value);
+        return p.getBirthday() != null && p.getBirthday().equals(value);
     }
 }

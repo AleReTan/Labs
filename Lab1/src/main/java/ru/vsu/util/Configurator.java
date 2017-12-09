@@ -14,7 +14,7 @@ public class Configurator {
     }
 
     public PersonSorter getSorter() {
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();//TODO: падает если запустить дебаг, как лечить
         String appConfigPath = rootPath + "configuration.properties";
 
         Properties appProps = new Properties();
@@ -24,9 +24,11 @@ public class Configurator {
             e.printStackTrace();
         }
         String appSorter = appProps.getProperty("sorter");
-        switch (appSorter){
-            case "bubble":  return new BubblePersonSorter();
-            default:return new BubblePersonSorter();
+        switch (appSorter) {
+            case "bubble":
+                return new BubblePersonSorter();
+            default:
+                return new BubblePersonSorter();
         }
     }
 

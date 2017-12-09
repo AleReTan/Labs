@@ -8,6 +8,7 @@ import ru.vsu.searcher.searcherImpl.LastNamePersonChecker;
 import ru.vsu.searcher.PersonChecker;
 import ru.vsu.sorter.PersonSorter;
 
+
 /**
  * Class for storing Persons objects.
  */
@@ -65,6 +66,7 @@ public class PersonRepository {
         }
         repository[numberOfCurrentElements] = newPerson;
         numberOfCurrentElements++;
+        trimToSize();//TODO:плохо или сойдет, проблема в том, что при расширении появляются нулы и соответственно нулпоинтеры
     }
 
     /**
@@ -75,7 +77,6 @@ public class PersonRepository {
     public void remove(int index) {
         //если указанный индекс меньше чем количество элементов в массиве, значит есть что удалять, если больше то там нулл и удалять ничего не надо
         if (index < numberOfCurrentElements) {
-            //if (repository[index]==null) return;
             for (int i = index; i < repository.length - 1; i++) {
                 repository[i] = repository[i + 1];
             }
@@ -87,15 +88,15 @@ public class PersonRepository {
     }
 
     /**
-     * Method for extending repository.
+     * Method for extending repository
      */
     private void extendRepository() {
-        int newLength = repository.length + (int) Math.ceil(repository.length / 2.0);
+        int newLength = repository.length + repository.length / 2 + 1;
         Person[] newRepository = new Person[newLength];
         System.arraycopy(repository, 0, newRepository, 0, repository.length);
         this.repository = newRepository;
+
     }
-    //TODO:Delete debug method
 
     /**
      * Utility method for debugging.
@@ -159,13 +160,15 @@ public class PersonRepository {
     private PersonRepository search(PersonChecker checker, Object value) {
         PersonRepository result = new PersonRepository();
         for (int i = 0; i < repository.length; i++) {
-            if (checker.check(repository[i], value)) ;
-            result.add(repository[i]);
+            if (checker.check(repository[i], value))
+                result.add(repository[i]);
+
+
         }
         return result;
     }
 
-    public PersonRepository searchByFio(String lastName) {
+    public PersonRepository searchByLastName(String lastName) {
         return search(new LastNamePersonChecker(), lastName);
     }
 
@@ -174,6 +177,6 @@ public class PersonRepository {
     }
 
     public PersonRepository searchByBirthDate(LocalDate date) {
-        return search((p, a) -> p.getBirthday().equals(a), date);
+        return search((p, a) -> p.getBirthday() != null && p.getBirthday().equals(a), date);
     }
 }

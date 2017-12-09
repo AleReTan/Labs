@@ -4,8 +4,6 @@ import org.joda.time.LocalDate;
 import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.repository.repositoryImpl.PersonRepository;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         PersonRepository personRepository = new PersonRepository();
@@ -13,45 +11,53 @@ public class Main {
         Person person1 = new Person("1", "1", "1");
         Person person2 = new Person("2", "2", "2");
         Person person3 = new Person("3", "3", "3");
-        Person person4 = new Person("4", "4", "4");
-        Person person5 = new Person("4", "4", "4",  new LocalDate(1993, 7, 27));
+        Person person4 = new Person("4", "4", "2");
+        Person person5 = new Person("5", "5", "5",  new LocalDate(1993, 7, 27));
 
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.add(person1);
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.add(person2);
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.add(person3);
-        personRepository.print();
-        personRepository.debug();
-
+        personRepository.add(person5);
         personRepository.add(person4);
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.remove(2);
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.remove(0);
-        personRepository.print();
-        personRepository.debug();
-
-        personRepository.trimToSize();
-        personRepository.print();
-        personRepository.debug();
-
+        personRepository.add(person3);
+        personRepository.add(person2);
         personRepository.add(person1);
         personRepository.print();
         personRepository.debug();
+        personRepository.sortById();
+        personRepository.print();
+        personRepository.debug();
 
-        System.out.println(Arrays.toString(personRepository.search(2)));
-        System.out.println(person5.toString());
+        personRepository.searchByBirthDate(new LocalDate(1993, 7, 27)).print();
+//
+//        personRepository.add(person1);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.add(person2);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.add(person3);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.add(person4);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.remove(2);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.remove(0);
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.trimToSize();
+//        personRepository.print();
+//        personRepository.debug();
+//
+//        personRepository.add(person1);
+//        personRepository.print();
+//        personRepository.debug();
+
     }
 }

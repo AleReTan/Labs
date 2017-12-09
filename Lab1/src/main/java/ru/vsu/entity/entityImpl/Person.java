@@ -18,7 +18,7 @@ public class Person {
      * Empty constructor.
      */
     public Person() {
-        this.id=tempId;
+        this.id = tempId;
         tempId++;
 
     }
@@ -31,7 +31,7 @@ public class Person {
      * @param lastName   last name
      */
     public Person(String firstName, String middleName, String lastName) {
-        this.id=tempId;
+        this.id = tempId;
         tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -47,7 +47,7 @@ public class Person {
      * @param birthday   birth date
      */
     public Person(String firstName, String middleName, String lastName, LocalDate birthday) {
-        this.id=tempId;
+        this.id = tempId;
         tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -63,7 +63,7 @@ public class Person {
      * @param lastName   last name
      */
     public Person(String firstName, String middleName, String lastName, int age) {
-        this.id=tempId;
+        this.id = tempId;
         tempId++;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -104,7 +104,7 @@ public class Person {
 
     public Integer getAge() {
         if (birthday == null) return 0;
-        else return LocalDate.now().getYear()-birthday.getYear();
+        else return LocalDate.now().getYear() - birthday.getYear();
     }
 
     public LocalDate getBirthday() {
