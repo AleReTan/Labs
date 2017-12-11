@@ -14,8 +14,8 @@ public class Configurator {
     }
 
     public PersonSorter getSorter() {
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();//TODO: падает если запустить дебаг, как лечить
-        String appConfigPath = rootPath + "configuration.properties";
+        //String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();//TODO: падает если запустить дебаг, как лечить
+        String appConfigPath = "/Users/alexresh/IdeaProjects/Labs/Lab1/src/main/resources/" + "configuration.properties";
 
         Properties appProps = new Properties();
         try {

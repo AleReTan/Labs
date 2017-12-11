@@ -1,12 +1,15 @@
 package ru.vsu;
 
 import org.joda.time.LocalDate;
+import ru.vsu.entity.entityImpl.Car;
 import ru.vsu.entity.entityImpl.Person;
+import ru.vsu.repository.repositoryImpl.CarRepository;
 import ru.vsu.repository.repositoryImpl.PersonRepository;
 
 public class Main {
     public static void main(String[] args) {
         PersonRepository personRepository = new PersonRepository();
+        personRepository.debug();
         //Creating new objects Person
         Person person1 = new Person("1", "1", "1");
         Person person2 = new Person("2", "2", "2");
@@ -26,6 +29,9 @@ public class Main {
         personRepository.debug();
 
         personRepository.searchByBirthDate(new LocalDate(1993, 7, 27)).print();
+
+        personRepository.getPerson(100);
+        personRepository.getPerson(140);
 //
 //        personRepository.add(person1);
 //        personRepository.print();

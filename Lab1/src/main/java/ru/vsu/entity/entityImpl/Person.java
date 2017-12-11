@@ -15,15 +15,6 @@ public class Person {
     private LocalDate birthday;
 
     /**
-     * Empty constructor.
-     */
-    public Person() {
-        this.id = tempId;
-        tempId++;
-
-    }
-
-    /**
      * Constructor with name.
      *
      * @param firstName  first name
@@ -55,27 +46,8 @@ public class Person {
         this.birthday = birthday;
     }
 
-    /**
-     * Constructor with name and age.
-     *
-     * @param firstName  first name
-     * @param middleName middle name
-     * @param lastName   last name
-     */
-    public Person(String firstName, String middleName, String lastName, int age) {
-        this.id = tempId;
-        tempId++;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -109,10 +81,6 @@ public class Person {
 
     public LocalDate getBirthday() {
         return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
     }
 
     @Override

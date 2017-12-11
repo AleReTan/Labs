@@ -1,15 +1,17 @@
 package ru.vsu.repository;
 
-
-import ru.vsu.entity.entityImpl.Person;
-
 import java.util.Arrays;
 
 public abstract class RepositoryAbstract<T> implements Repository<T> {
     private static double EXTEND_COEFFICIENT = 1.2;
+    private static int INITIAL_SIZE = 2;
     private T[] repository;
-    private int size;
-    private int capacity;
+    private int size;//размер массива
+    private int capacity;//количество элементов в массиве
+
+    public T[] getRepository(){
+        return repository;
+    }
 
     @Override
     public T get(int index) {
@@ -47,12 +49,12 @@ public abstract class RepositoryAbstract<T> implements Repository<T> {
 
     }
 
-    @Override
-    public void extend() {
+    private void extend() {
         size *= EXTEND_COEFFICIENT + 1;
-        T[] newRepository = Arrays.copyOf(repository, size);
-        System.arraycopy(repository, 0, newRepository, 0, repository.length);
-        repository = newRepository;//TODO: чет чушь, надо править
+        repository = Arrays.copyOf(this.repository, size);
     }
 
+    private void trimToSize() {
+        this.repository = Arrays.copyOf(this.repository, capacity);
+    }
 }

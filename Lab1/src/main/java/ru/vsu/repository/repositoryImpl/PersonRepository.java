@@ -1,5 +1,7 @@
 package ru.vsu.repository.repositoryImpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import ru.vsu.comparator.comparatorImpl.*;
 import ru.vsu.util.Configurator;
@@ -13,9 +15,11 @@ import ru.vsu.sorter.PersonSorter;
  * Class for storing Persons objects.
  */
 public class PersonRepository {
-    private final int INITIAL_PERSON_CAP = 2;
+    private final int INITIAL_PERSON_CAP = 1;
     private Person[] repository;
     private int numberOfCurrentElements = 0;
+
+    private static final Logger LOGGER = LogManager.getLogger(PersonRepository.class.getName());
 
     private PersonSorter sorter = Configurator.getInstance().getSorter(); //sorter
 
@@ -30,10 +34,11 @@ public class PersonRepository {
      * @return Person object
      */
     public Person getPerson(int index) {
+        LOGGER.debug("This method was used");
         if (index < repository.length) {
             return repository[index];
         } else {
-            System.out.println("This index bigger than repository capacity");
+            LOGGER.error("This index bigger than repository capacity!");
             return null;
         }
     }
@@ -44,6 +49,7 @@ public class PersonRepository {
      * @return Array of Persons's
      */
     public Person[] getAllPersons() {
+        LOGGER.debug("This method was used");
         Person[] allPersons = new Person[numberOfCurrentElements];
         int count = 0;
         for (Person person : repository) {
@@ -61,6 +67,7 @@ public class PersonRepository {
      * @param newPerson Object Person for adding
      */
     public void add(Person newPerson) {
+        LOGGER.debug("This method was used");
         if (numberOfCurrentElements + 1 > repository.length) {
             extendRepository();
         }
@@ -75,6 +82,7 @@ public class PersonRepository {
      * @param index Target index
      */
     public void remove(int index) {
+        LOGGER.debug("This method was used");
         //если указанный индекс меньше чем количество элементов в массиве, значит есть что удалять, если больше то там нулл и удалять ничего не надо
         if (index < numberOfCurrentElements) {
             for (int i = index; i < repository.length - 1; i++) {
@@ -82,15 +90,17 @@ public class PersonRepository {
             }
             repository[repository.length - 1] = null;
             numberOfCurrentElements--;
+            trimToSize();
 
-        } else System.out.println("This index bigger than repository capacity");
-
+        } else LOGGER.error("This index bigger than repository capacity!");
     }
 
     /**
      * Method for extending repository
      */
     private void extendRepository() {
+        LOGGER.debug("This method was used");
+        LOGGER.info("Array was extended");
         int newLength = repository.length + repository.length / 2 + 1;
         Person[] newRepository = new Person[newLength];
         System.arraycopy(repository, 0, newRepository, 0, repository.length);
@@ -122,6 +132,7 @@ public class PersonRepository {
      * Trims the capacity of target array instance to be the array's current size
      */
     public void trimToSize() {
+        LOGGER.debug("This method was used");
         Person[] correctSize = new Person[numberOfCurrentElements];
         System.arraycopy(repository, 0, correctSize, 0, numberOfCurrentElements);
         this.repository = correctSize;
@@ -134,26 +145,32 @@ public class PersonRepository {
      * @return capacity
      */
     public int getCapacity() {
+        LOGGER.debug("This method was used");
         return repository.length;
     }
 
     public Person[] getRepository() {
+        LOGGER.debug("This method was used");
         return repository;
     }
 
     public void setSorter(PersonSorter sorter) {
+        LOGGER.debug("This method was used");
         this.sorter = sorter;
     }
 
     public void sortByLastName() {
+        LOGGER.debug("This method was used");
         sorter.sort(repository, new PersonComparatorByLastName());
     }
 
     public void sortByAge() {
+        LOGGER.debug("This method was used");
         sorter.sort(repository, new PersonComparatorByAge());
     }
 
     public void sortById() {
+        LOGGER.debug("This method was used");
         sorter.sort(repository, new PersonComparatorById());
     }
 
@@ -162,21 +179,22 @@ public class PersonRepository {
         for (int i = 0; i < repository.length; i++) {
             if (checker.check(repository[i], value))
                 result.add(repository[i]);
-
-
         }
         return result;
     }
 
     public PersonRepository searchByLastName(String lastName) {
+        LOGGER.debug("This method was used");
         return search(new LastNamePersonChecker(), lastName);
     }
 
     public PersonRepository searchByAge(Integer age) {
+        LOGGER.debug("This method was used");
         return search((p, a) -> p.getAge().equals(a), age);
     }
 
     public PersonRepository searchByBirthDate(LocalDate date) {
+        LOGGER.debug("This method was used");
         return search((p, a) -> p.getBirthday() != null && p.getBirthday().equals(a), date);
     }
 }

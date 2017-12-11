@@ -5,7 +5,4 @@ public interface Repository<T> {
     public T[] getAll();
     public void add(T t);
     public void remove(int index);
-    public void extend();
-    public void trimToSize();
-
 }
