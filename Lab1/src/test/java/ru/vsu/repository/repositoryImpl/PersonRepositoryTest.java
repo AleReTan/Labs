@@ -178,7 +178,6 @@ public class PersonRepositoryTest {
 
         personRepository.add(person2);
         personRepository.add(person1);
-        personRepository.sortByLastName();
         Person[] actual = personRepository.searchByAge(1).getRepository();
 
         assertArrayEquals(expected, actual);
@@ -192,7 +191,6 @@ public class PersonRepositoryTest {
 
         personRepository.add(person2);
         personRepository.add(person1);
-        personRepository.sortByLastName();
         Person[] actual = personRepository.searchByBirthDate(new LocalDate(2016,1,1)).getRepository();
 
         assertArrayEquals(expected, actual);

@@ -1,22 +1,25 @@
 package ru.vsu.repository;
 
+import ru.vsu.sorter.Sorter;
+
 import java.util.Arrays;
 
 public abstract class RepositoryAbstract<T> implements Repository<T> {
-    private static double EXTEND_COEFFICIENT = 1.2;
-    private static int INITIAL_SIZE = 2;
-    private T[] repository;
-    private int size;//размер массива
-    private int capacity;//количество элементов в массиве
+    protected static double EXTEND_COEFFICIENT = 1.2;
+    protected static int INITIAL_SIZE = 1;
+    protected Object[] repository;
+    protected int size;//размер массива
+    protected int capacity;//количество элементов в массиве
+    protected Sorter sorter;
 
-    public T[] getRepository(){
-        return repository;
+    public T[] getRepository() {
+        return (T[]) repository;
     }
 
     @Override
     public T get(int index) {
         if (index < repository.length) {
-            return repository[index];
+            return (T) repository[index];
         } else {
             System.out.println("This index bigger than repository capacity");//
             return null;
@@ -25,7 +28,7 @@ public abstract class RepositoryAbstract<T> implements Repository<T> {
 
     @Override
     public T[] getAll() {
-        return repository;
+        return (T[]) repository;
     }
 
     @Override
@@ -49,12 +52,26 @@ public abstract class RepositoryAbstract<T> implements Repository<T> {
 
     }
 
-    private void extend() {
-        size *= EXTEND_COEFFICIENT + 1;
+    public int getSize() {
+        return size;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    protected void setSorter(Sorter sorter) {
+        this.sorter = sorter;
+    }
+
+    protected void extend() {
+        size = (int) (size * EXTEND_COEFFICIENT) + 1;
         repository = Arrays.copyOf(this.repository, size);
     }
 
-    private void trimToSize() {
+    protected void trimToSize() {
         this.repository = Arrays.copyOf(this.repository, capacity);
     }
+
+
 }

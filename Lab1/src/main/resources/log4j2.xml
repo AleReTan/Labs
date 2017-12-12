@@ -12,7 +12,6 @@
         </Appender>
     </Appenders>
     <Loggers>
-
         <Logger name="ru.vsu" level="debug" additivity="false">
             <AppenderRef ref="File"/>
         </Logger>

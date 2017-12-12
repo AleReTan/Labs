@@ -4,11 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import ru.vsu.comparator.comparatorImpl.*;
+import ru.vsu.searcher.Checker;
+import ru.vsu.sorter.Sorter;
 import ru.vsu.util.Configurator;
 import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.searcher.searcherImpl.LastNamePersonChecker;
-import ru.vsu.searcher.PersonChecker;
-import ru.vsu.sorter.PersonSorter;
 
 
 /**
@@ -21,7 +21,7 @@ public class PersonRepository {
 
     private static final Logger LOGGER = LogManager.getLogger(PersonRepository.class.getName());
 
-    private PersonSorter sorter = Configurator.getInstance().getSorter(); //sorter
+    private Sorter sorter = Configurator.getInstance().getPersonSorter(); //sorter
 
     public PersonRepository() {
         repository = new Person[INITIAL_PERSON_CAP];
@@ -154,7 +154,7 @@ public class PersonRepository {
         return repository;
     }
 
-    public void setSorter(PersonSorter sorter) {
+    public void setSorter(Sorter sorter) {
         LOGGER.debug("This method was used");
         this.sorter = sorter;
     }
@@ -174,7 +174,7 @@ public class PersonRepository {
         sorter.sort(repository, new PersonComparatorById());
     }
 
-    private PersonRepository search(PersonChecker checker, Object value) {
+    private PersonRepository search(Checker<Person> checker, Object value) {
         PersonRepository result = new PersonRepository();
         for (int i = 0; i < repository.length; i++) {
             if (checker.check(repository[i], value))

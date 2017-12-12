@@ -1,16 +1,14 @@
 package ru.vsu.entity.entityImpl;
 
-import org.joda.time.LocalDate;
-
 public class Car {
-    private static int tempId = 1; //TODO: почитать про uuid и uid и мб переделать на них
+    private static int tempId = 1;
     private int id;
     private String color;
-    private LocalDate carDateManufacture;//TODO: сделать только год
+    private int carDateManufacture;
     private int price;
     private String model;
 
-    public Car(String model, int price, String color, LocalDate carDateManufacture) {
+    public Car(String model, int price, String color, int carDateManufacture) {
         this.id = tempId;
         tempId++;
         this.model = model;
@@ -27,7 +25,7 @@ public class Car {
         return color;
     }
 
-    public LocalDate getCarDateManufacture() {
+    public int getCarYearManufacture() {
         return carDateManufacture;
     }
 
