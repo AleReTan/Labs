@@ -4,181 +4,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import ru.vsu.comparator.comparatorImpl.*;
-import ru.vsu.searcher.Checker;
-import ru.vsu.sorter.Sorter;
-import ru.vsu.util.Configurator;
 import ru.vsu.entity.entityImpl.Person;
+import ru.vsu.repository.Repository;
+import ru.vsu.repository.RepositoryAbstract;
+import ru.vsu.searcher.Checker;
 import ru.vsu.searcher.searcherImpl.LastNamePersonChecker;
+import ru.vsu.util.Configurator;
 
-
-/**
- * Class for storing Persons objects.
- */
-public class PersonRepository {
-    private final int INITIAL_PERSON_CAP = 1;
-    private Person[] repository;
-    private int numberOfCurrentElements = 0;
+public class PersonRepository extends RepositoryAbstract<Person> implements Repository<Person> {
 
     private static final Logger LOGGER = LogManager.getLogger(PersonRepository.class.getName());
 
-    private Sorter sorter = Configurator.getInstance().getPersonSorter(); //sorter
-
     public PersonRepository() {
-        repository = new Person[INITIAL_PERSON_CAP];
-    }
-
-    /**
-     * Returns the Person element at the specified position in this repository.
-     *
-     * @param index Target index
-     * @return Person object
-     */
-    public Person getPerson(int index) {
-        LOGGER.debug("This method was used");
-        if (index < repository.length) {
-            return repository[index];
-        } else {
-            LOGGER.error("This index bigger than repository capacity!");
-            return null;
-        }
-    }
-
-    /**
-     * Returns all elements.
-     *
-     * @return Array of Persons's
-     */
-    public Person[] getAllPersons() {
-        LOGGER.debug("This method was used");
-        Person[] allPersons = new Person[numberOfCurrentElements];
-        int count = 0;
-        for (Person person : repository) {
-            if (!(person == null)) {
-                allPersons[count] = person;
-                count++;
-            }
-        }
-        return allPersons;
-    }
-
-    /**
-     * Add the Person element into repository.
-     *
-     * @param newPerson Object Person for adding
-     */
-    public void add(Person newPerson) {
-        LOGGER.debug("This method was used");
-        if (numberOfCurrentElements + 1 > repository.length) {
-            extendRepository();
-        }
-        repository[numberOfCurrentElements] = newPerson;
-        numberOfCurrentElements++;
-        trimToSize();//TODO:плохо или сойдет, проблема в том, что при расширении появляются нулы и соответственно нулпоинтеры
-    }
-
-    /**
-     * Remove the Person element at the specified position in this repository.
-     *
-     * @param index Target index
-     */
-    public void remove(int index) {
-        LOGGER.debug("This method was used");
-        //если указанный индекс меньше чем количество элементов в массиве, значит есть что удалять, если больше то там нулл и удалять ничего не надо
-        if (index < numberOfCurrentElements) {
-            for (int i = index; i < repository.length - 1; i++) {
-                repository[i] = repository[i + 1];
-            }
-            repository[repository.length - 1] = null;
-            numberOfCurrentElements--;
-            trimToSize();
-
-        } else LOGGER.error("This index bigger than repository capacity!");
-    }
-
-    /**
-     * Method for extending repository
-     */
-    private void extendRepository() {
-        LOGGER.debug("This method was used");
-        LOGGER.info("Array was extended");
-        int newLength = repository.length + repository.length / 2 + 1;
-        Person[] newRepository = new Person[newLength];
-        System.arraycopy(repository, 0, newRepository, 0, repository.length);
-        this.repository = newRepository;
-
-    }
-
-    /**
-     * Utility method for debugging.
-     */
-    public void debug() {
-        System.out.println("Capacity = " + repository.length + " numberOfCurrentElements = " + numberOfCurrentElements);
-        System.out.println();
-    }
-
-    /**
-     * Method for printing elements from repository.
-     */
-    public void print() {
-        for (Person person : repository) {
-            if (!(person == null)) {
-                System.out.print(person.toString() + " ");
-            } else System.out.print("NULL ");
-        }
-        System.out.println();
-    }
-
-    /**
-     * Trims the capacity of target array instance to be the array's current size
-     */
-    public void trimToSize() {
-        LOGGER.debug("This method was used");
-        Person[] correctSize = new Person[numberOfCurrentElements];
-        System.arraycopy(repository, 0, correctSize, 0, numberOfCurrentElements);
-        this.repository = correctSize;
-
-    }
-
-    /**
-     * Return repository capacity.
-     *
-     * @return capacity
-     */
-    public int getCapacity() {
-        LOGGER.debug("This method was used");
-        return repository.length;
-    }
-
-    public Person[] getRepository() {
-        LOGGER.debug("This method was used");
-        return repository;
-    }
-
-    public void setSorter(Sorter sorter) {
-        LOGGER.debug("This method was used");
-        this.sorter = sorter;
-    }
-
-    public void sortByLastName() {
-        LOGGER.debug("This method was used");
-        sorter.sort(repository, new PersonComparatorByLastName());
-    }
-
-    public void sortByAge() {
-        LOGGER.debug("This method was used");
-        sorter.sort(repository, new PersonComparatorByAge());
+        repository = new Person[INITIAL_SIZE];
+        size = INITIAL_SIZE;
+        capacity = 0;
+        sorter = Configurator.getInstance().getPersonSorter();
     }
 
     public void sortById() {
-        LOGGER.debug("This method was used");
         sorter.sort(repository, new PersonComparatorById());
     }
+
+    public void sortByAge() {
+        sorter.sort(repository, new PersonComparatorByAge());
+    }
+
+    public void sortByLastName() {
+        sorter.sort(repository, new PersonComparatorByLastName());
+    }
+
 
     private PersonRepository search(Checker<Person> checker, Object value) {
         PersonRepository result = new PersonRepository();
         for (int i = 0; i < repository.length; i++) {
-            if (checker.check(repository[i], value))
-                result.add(repository[i]);
+            if (checker.check((Person) repository[i], value))
+                result.add((Person) repository[i]);
         }
         return result;
     }
@@ -197,4 +58,5 @@ public class PersonRepository {
         LOGGER.debug("This method was used");
         return search((p, a) -> p.getBirthday() != null && p.getBirthday().equals(a), date);
     }
+
 }

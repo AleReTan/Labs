@@ -47,6 +47,7 @@ public abstract class RepositoryAbstract<T> implements Repository<T> {
             System.arraycopy(repository, index + 1, repository, index, size - 1 - index);
             repository[size - 1] = null;
             capacity--;
+            trimToSize();
 
         } else System.out.println("This index bigger than repository capacity");
 

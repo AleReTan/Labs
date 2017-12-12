@@ -6,8 +6,6 @@ import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.repository.repositoryImpl.CarRepository;
 import ru.vsu.repository.repositoryImpl.PersonRepository;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         PersonRepository personRepository = new PersonRepository();

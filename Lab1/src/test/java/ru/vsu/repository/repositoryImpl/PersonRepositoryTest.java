@@ -4,8 +4,6 @@ import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.vsu.entity.entityImpl.Person;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 @SuppressWarnings("Duplicates")
@@ -22,7 +20,7 @@ public class PersonRepositoryTest {
 
         Person expected = person1;
 
-        Person actual = personRepository.getPerson(0);
+        Person actual = personRepository.get(0);
 
         assertEquals(expected, actual);
     }
