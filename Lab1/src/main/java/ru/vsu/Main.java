@@ -31,53 +31,5 @@ public class Main {
         carRepository.add(car2);
 
 
-//        personRepository.add(person5);
-//        personRepository.add(person4);
-//        personRepository.add(person3);
-//        personRepository.add(person2);
-//        personRepository.add(person1);
-//        personRepository.print();
-//        personRepository.debug();
-//        personRepository.sortById();
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.searchByBirthDate(new LocalDate(1993, 7, 27)).print();
-//
-//        personRepository.getPerson(100);
-//        personRepository.getPerson(140);
-//
-//        personRepository.add(person1);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.add(person2);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.add(person3);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.add(person4);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.remove(2);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.remove(0);
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.trimToSize();
-//        personRepository.print();
-//        personRepository.debug();
-//
-//        personRepository.add(person1);
-//        personRepository.print();
-//        personRepository.debug();
-
     }
 }

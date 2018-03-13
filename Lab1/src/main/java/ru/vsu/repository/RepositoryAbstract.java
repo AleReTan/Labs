@@ -12,10 +12,6 @@ public abstract class RepositoryAbstract<T> implements Repository<T> {
     protected int capacity;//количество элементов в массиве
     protected Sorter sorter;
 
-    public T[] getRepository() {
-        return (T[]) repository;
-    }
-
     @Override
     public T get(int index) {
         if (index < repository.length) {

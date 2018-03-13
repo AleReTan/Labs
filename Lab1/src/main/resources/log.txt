@@ -17,3 +17,13 @@
 2017-12-12 20:02:34,685 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByManufactureYear; thread = [main] This method was used
 2017-12-12 20:02:34,696 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByColor; thread = [main] This method was used
 2017-12-12 20:02:34,701 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByPrice; thread = [main] This method was used
+2017-12-17 19:10:54,031 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByManufactureYear; thread = [main] This method was used
+2017-12-17 19:10:54,082 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByColor; thread = [main] This method was used
+2017-12-17 19:10:54,092 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByPrice; thread = [main] This method was used
+2017-12-17 19:11:08,726 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByManufactureYear; thread = [main] This method was used
+2017-12-17 19:11:08,740 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByColor; thread = [main] This method was used
+2017-12-17 19:11:08,760 DEBUG ru.vsu.repository.repositoryImpl.CarRepository; method = searchByPrice; thread = [main] This method was used
+2017-12-17 19:11:16,813 DEBUG ru.vsu.repository.repositoryImpl.PersonRepository; method = searchByLastName; thread = [main] This method was used
+2017-12-17 19:11:16,821 DEBUG ru.vsu.repository.repositoryImpl.PersonRepository; method = searchByAge; thread = [main] This method was used
+2017-12-17 19:11:16,861 DEBUG ru.vsu.repository.repositoryImpl.PersonRepository; method = searchByBirthDate; thread = [main] This method was used
+2017-12-17 19:11:16,862 DEBUG ru.vsu.repository.repositoryImpl.PersonRepository; method = searchByLastName; thread = [main] This method was used

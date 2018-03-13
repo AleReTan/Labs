@@ -32,7 +32,7 @@ public class PersonRepositoryTest {
         expected[0] = person1;
 
         personRepository.add(person1);
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -46,7 +46,7 @@ public class PersonRepositoryTest {
 
         personRepository.add(person1);
         personRepository.add(person2);
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
         assertArrayEquals(expected, actual);
     }
 
@@ -57,7 +57,7 @@ public class PersonRepositoryTest {
 
         personRepository.add(person1);
         personRepository.remove(0);
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -71,7 +71,7 @@ public class PersonRepositoryTest {
         personRepository.add(person1);
         personRepository.add(person2);
         personRepository.remove(1);
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -85,7 +85,7 @@ public class PersonRepositoryTest {
         personRepository.add(person1);
         personRepository.add(person2);
         personRepository.remove(0);
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -101,7 +101,7 @@ public class PersonRepositoryTest {
         personRepository.add(person2);
         personRepository.add(person1);
         personRepository.sortByLastName();
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -117,7 +117,7 @@ public class PersonRepositoryTest {
         personRepository.add(person2);
         personRepository.add(person1);
         personRepository.sortByAge();
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -133,7 +133,7 @@ public class PersonRepositoryTest {
         personRepository.add(person2);
         personRepository.add(person1);
         personRepository.sortById();
-        Person[] actual = personRepository.getRepository();
+        Person[] actual = personRepository.getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -147,7 +147,7 @@ public class PersonRepositoryTest {
         personRepository.add(person2);
         personRepository.add(person1);
         personRepository.sortByLastName();
-        Person[] actual = personRepository.searchByLastName("1").getRepository();
+        Person[] actual = personRepository.searchByLastName("1").getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -163,7 +163,7 @@ public class PersonRepositoryTest {
         personRepository.add(person1);
         personRepository.add(person3);
         personRepository.sortByLastName();
-        Person[] actual = personRepository.searchByLastName("2").getRepository();
+        Person[] actual = personRepository.searchByLastName("2").getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -176,7 +176,7 @@ public class PersonRepositoryTest {
 
         personRepository.add(person2);
         personRepository.add(person1);
-        Person[] actual = personRepository.searchByAge(1).getRepository();
+        Person[] actual = personRepository.searchByAge(1).getAll();
 
         assertArrayEquals(expected, actual);
     }
@@ -189,7 +189,7 @@ public class PersonRepositoryTest {
 
         personRepository.add(person2);
         personRepository.add(person1);
-        Person[] actual = personRepository.searchByBirthDate(new LocalDate(2016,1,1)).getRepository();
+        Person[] actual = personRepository.searchByBirthDate(new LocalDate(2016,1,1)).getAll();
 
         assertArrayEquals(expected, actual);
     }
