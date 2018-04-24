@@ -8,6 +8,9 @@ public class Car {
     private int price;
     private String model;
 
+    public Car() {
+    }
+
     public Car(String model, int price, String color, int carDateManufacture) {
         this.id = tempId;
         tempId++;
@@ -43,6 +46,18 @@ public class Car {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setCarDateManufacture(int carDateManufacture) {
+        this.carDateManufacture = carDateManufacture;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

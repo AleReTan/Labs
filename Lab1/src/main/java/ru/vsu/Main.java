@@ -5,6 +5,9 @@ import ru.vsu.entity.entityImpl.Car;
 import ru.vsu.entity.entityImpl.Person;
 import ru.vsu.repository.repositoryImpl.CarRepository;
 import ru.vsu.repository.repositoryImpl.PersonRepository;
+import ru.vsu.util.Observer;
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,11 +27,30 @@ public class Main {
         Car car4 = new Car("Mitsubishi", 1000000, "white", 2013);
         Car car5 = new Car("Lexus", 6000000, "white", 2009);
 
-        carRepository.add(car1);
-        carRepository.add(car5);
-        carRepository.add(car3);
-        carRepository.add(car4);
-        carRepository.add(car2);
+        ArrayList<Car> writeCars = new ArrayList<>();
+        ArrayList<Car> readCars = new ArrayList<>();
+        writeCars.add(car1);
+        writeCars.add(car2);
+        writeCars.add(car3);
+        writeCars.add(car4);
+        writeCars.add(car5);
+
+        Observer observer = new Observer();
+
+        try {
+            observer.runXmlWriter(writeCars);
+            readCars = observer.runXmlParser();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (Car car : readCars) {
+            carRepository.add(car);
+        }
+//        carRepository.add(car1);
+//        carRepository.add(car5);
+//        carRepository.add(car3);
+//        carRepository.add(car4);
+//        carRepository.add(car2);
 
 
     }

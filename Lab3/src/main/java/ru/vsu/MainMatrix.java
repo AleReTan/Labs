@@ -6,11 +6,6 @@ import java.util.Random;
 
 public class MainMatrix {
 
-    /**
-     * Заполнение матрицы случайными числами.
-     *
-     * @param matrix Заполняемая матрица.
-     */
     private static void randomMatrix(final int[][] matrix) {
         final Random random = new Random();  // Генератор случайных чисел.
 
@@ -19,16 +14,6 @@ public class MainMatrix {
                 matrix[row][col] = random.nextInt(100);         // Случайное число от 0 до 100.
     }
 
-    //
-
-    /**
-     * Вывод матрицы в файл.
-     * Производится выравнивание значений для лучшего восприятия.
-     *
-     * @param fileWriter Объект, представляющий собой файл для записи.
-     * @param matrix     Выводимая матрица.
-     * @throws IOException
-     */
     private static void printMatrix(final FileWriter fileWriter,
                                     final int[][] matrix) throws IOException {
         boolean hasNegative = false;  // Признак наличия в матрице отрицательных чисел.
@@ -64,14 +49,6 @@ public class MainMatrix {
         }
     }
 
-    /**
-     * Вывод трёх матриц в файл. Файл будет перезаписан.
-     *
-     * @param fileName     Имя файла для вывода.
-     * @param firstMatrix  Первая матрица.
-     * @param secondMatrix Вторая матрица.
-     * @param resultMatrix Результирующая матрица.
-     */
     private static void printAllMatrix(final String fileName,
                                        final int[][] firstMatrix,
                                        final int[][] secondMatrix,
@@ -90,13 +67,6 @@ public class MainMatrix {
         }
     }
 
-    /**
-     * Однопоточное умножение матриц.
-     *
-     * @param firstMatrix  Первая матрица.
-     * @param secondMatrix Вторая матрица.
-     * @return Результирующая матрица.
-     */
     private static int[][] multiplyMatrix(final int[][] firstMatrix,
                                           final int[][] secondMatrix) {
         final int rowCount = firstMatrix.length;             // Число строк результирующей матрицы.
@@ -116,18 +86,9 @@ public class MainMatrix {
         return result;
     }
 
-    /**
-     * Многопоточное умножение матриц.
-     *
-     * @param firstMatrix  Первая (левая) матрица.
-     * @param secondMatrix Вторая (правая) матрица.
-     * @param threadCount  Число потоков.
-     * @return Результирующая матрица.
-     */
     private static int[][] multiplyMatrixMT(final int[][] firstMatrix,
                                             final int[][] secondMatrix,
                                             int threadCount) {
-        assert threadCount > 0;
 
         final int rowCount = firstMatrix.length;             // Число строк результирующей матрицы.
         final int colCount = secondMatrix[0].length;         // Число столбцов результирующей матрицы.
@@ -161,21 +122,10 @@ public class MainMatrix {
         return result;
     }
 
-    /**
-     * Число строк первой матрицы.
-     */
+
     final static int FIRST_MATRIX_ROWS = 100;
-    /**
-     * Число столбцов первой матрицы.
-     */
     final static int FIRST_MATRIX_COLS = 100;
-    /**
-     * Число строк второй матрицы (должно совпадать с числом столбцов первой матрицы).
-     */
     final static int SECOND_MATRIX_ROWS = FIRST_MATRIX_COLS;
-    /**
-     * Число столбцов второй матрицы.
-     */
     final static int SECOND_MATRIX_COLS = 100;
 
     public static void main(String[] args) {

@@ -1,32 +1,12 @@
 package ru.vsu;
 
-/**
- * Поток-вычислитель группы ячеек матрицы.
- */
+
 class MultiplierThread extends Thread {
-    /**
-     * Первая (левая) матрица.
-     */
     private final int[][] firstMatrix;
-    /**
-     * Вторая (правая) матрица.
-     */
     private final int[][] secondMatrix;
-    /**
-     * Результирующая матрица.
-     */
     private final int[][] resultMatrix;
-    /**
-     * Начальный индекс.
-     */
     private final int firstIndex;
-    /**
-     * Конечный индекс.
-     */
     private final int lastIndex;
-    /**
-     * Число членов суммы при вычислении значения ячейки.
-     */
     private final int sumLength;
 
     /**
@@ -50,12 +30,6 @@ class MultiplierThread extends Thread {
         sumLength = secondMatrix.length;
     }
 
-    /**
-     * Вычисление значения в одной ячейке.
-     *
-     * @param row Номер строки ячейки.
-     * @param col Номер столбца ячейки.
-     */
     private void calcValue(final int row, final int col) {
         int sum = 0;
         for (int i = 0; i < sumLength; ++i)
@@ -63,9 +37,6 @@ class MultiplierThread extends Thread {
         resultMatrix[row][col] = sum;
     }
 
-    /**
-     * Рабочая функция потока.
-     */
     @Override
     public void run() {
         System.out.println("Thread " + getName() + " started. Calculating cells from " + firstIndex + " to " + lastIndex + "...");
