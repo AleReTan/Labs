@@ -2,7 +2,7 @@ package ru.vsu.entity;
 
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
     private PriorityBlockingQueue<Client> queue = new PriorityBlockingQueue();
 
     CashDeskEntity deskEntity;
@@ -48,21 +48,28 @@ public class Cashier implements Runnable {
     }
 
     private void withdraw(double amount) {
-        System.out.println(deskEntity.getBalance() + " before withdraw");
+        System.out.println(getName() + " " + deskEntity.getBalance() + " before withdraw");
         synchronized (deskEntity) {
             if (deskEntity.getBalance() > amount)
                 deskEntity.setBalance(deskEntity.getBalance() - amount);
             else System.out.println("Not enough money");
         }
-        System.out.println(deskEntity.getBalance() + " after withdraw");
+        System.out.println("withdraw = " + amount);
+        System.out.println(getName() + " " + deskEntity.getBalance() + " after withdraw");
     }
 
     private void deposit(double amount) {
-        System.out.println(deskEntity.getBalance() + " before deposit");
+        System.out.println(getName() + " " + deskEntity.getBalance() + " before deposit");
         synchronized (deskEntity) {
             deskEntity.setBalance(deskEntity.getBalance() + amount);
         }
-        System.out.println(deskEntity.getBalance() + " after deposit");
+        System.out.println("deposit = " + amount);
+        System.out.println(getName() + " " + deskEntity.getBalance() + " after deposit");
     }
 
+    @Override
+    public String toString() {
+        return "Cashier{" +
+                "queue=" + queue;
+    }
 }

@@ -1,6 +1,6 @@
 package ru.vsu.entity;
 
-public class Client {
+public class Client implements Comparable<Client> {
     private String operation;
     private double amount;
     private long time_in_seconds;
@@ -43,5 +43,17 @@ public class Client {
                 ", amount=" + amount +
                 ", time_in_seconds=" + time_in_seconds +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Client o) {
+        int result = operation.compareTo(o.getOperation());
+        if (result != 0) {
+            return result;
+        }
+        if (amount == o.getAmount()) return 0;
+
+        result = amount - o.getAmount() > 0 ? 1 : -1;
+        return result;
     }
 }

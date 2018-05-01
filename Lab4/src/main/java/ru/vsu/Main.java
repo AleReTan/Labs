@@ -9,10 +9,11 @@ public class Main {
         Cashier[] pool = new Cashier[5];
         for (int i = 0; i < pool.length; i++){
             pool[i] = new Cashier(CashDeskEntity.getInstance());
-            pool[i].run();
+            pool[i].start();
+            //new Thread(pool[i]).start();
         }
         ClientCreator clientCreator = new ClientCreator(pool);
-        clientCreator.run();
+        new Thread(clientCreator).start();
 
     }
 }

@@ -22,12 +22,13 @@ public class ClientCreator implements Runnable {
                     cashierWithMinClient = i;
                 }
             }
-            pool[cashierWithMinClient].getQueue().offer(
-                    new Client(operation[random.nextInt(operation.length)],
-                            random.nextDouble() * 10000,
-                            random.nextInt(10)));
+            Client client = new Client(operation[random.nextInt(operation.length)],
+                    random.nextDouble() * 10000,
+                    random.nextInt(10));
+            pool[cashierWithMinClient].getQueue().add(client);
+            System.out.println("New client added to cashier " + client);
             try {
-                Thread.sleep(random.nextInt(15) * 1000);
+                Thread.sleep(random.nextInt(5) * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
